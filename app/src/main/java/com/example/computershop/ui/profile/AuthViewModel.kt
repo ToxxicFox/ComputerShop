@@ -5,7 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.computershop.network.ResultValue
-import com.example.computershop.network.data.LoginRequestObject
+import com.example.computershop.network.data.models.LoginRequestObject
+import com.example.computershop.network.data.models.SignUpRequestObject
 import com.example.computershop.repositories.AuthRepository
 import kotlinx.coroutines.launch
 
@@ -13,14 +14,20 @@ class AuthViewModel(
     private val repository: AuthRepository
 ) : ViewModel() {
 
-    private val mutableLoginResponse: MutableLiveData<ResultValue<String>> = MutableLiveData()
-    val loginResponse: LiveData<ResultValue<String>>
-        get() = mutableLoginResponse
+    private val assignedToken: MutableLiveData<ResultValue<String>> = MutableLiveData()
+    val token: LiveData<ResultValue<String>>
+        get() = assignedToken
 
     fun login(
         user: LoginRequestObject
     ) = viewModelScope.launch {
-        mutableLoginResponse.value = repository.login(user)
+        assignedToken.value = repository.login(user)
+    }
+
+    fun signUp(
+        user: SignUpRequestObject
+    ) = viewModelScope.launch {
+        assignedToken.value = repository.signUp(user)
     }
 
     fun saveAuthToken(token: String) = viewModelScope.launch {

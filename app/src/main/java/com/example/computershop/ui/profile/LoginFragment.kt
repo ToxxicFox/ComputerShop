@@ -6,16 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.computershop.R
 import com.example.computershop.databinding.FragmentLoginBinding
 import com.example.computershop.network.AuthApi
 import com.example.computershop.network.ResultValue
-import com.example.computershop.network.data.LoginRequestObject
+import com.example.computershop.network.data.models.LoginRequestObject
 import com.example.computershop.repositories.AuthRepository
 import com.example.computershop.ui.base.BaseFragment
-import kotlinx.coroutines.launch
 
 const val TAG = "LOGIN_FRAGMENT"
 
@@ -52,7 +50,7 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
 
     fun login() {
 
-        viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.token.observe(viewLifecycleOwner, Observer {
             when(it) {
                 is ResultValue.Success -> {
                     viewModel.saveAuthToken(it.value)
@@ -67,9 +65,9 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
         val email = binding.signEmail.text.toString()
         val password = binding.signPasswordLogin.text.toString()
         val deviceName = android.os.Build.MODEL
-        val requestObject = LoginRequestObject(email, password, deviceName)
+        val requestLoginObject = LoginRequestObject(email, password, deviceName)
 
-        viewModel.login(requestObject)
+        viewModel.login(requestLoginObject)
     }
 
 }

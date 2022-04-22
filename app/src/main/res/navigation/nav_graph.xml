@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_navigation_sign_up_to_navigation_login"
             app:destination="@id/navigation_login" />
+        <action
+            android:id="@+id/action_navigation_sign_up_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
     </fragment>
     <fragment
         android:id="@+id/navigation_login"
