@@ -25,13 +25,8 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
         val userPreferences = UserPreferences(this)
 
-        userPreferences.authToken.asLiveData().observe(this, Observer {
-            Toast.makeText(this, it ?: "Token is null", Toast.LENGTH_SHORT).show()
-        })
-
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_catalog, R.id.navigation_cart, R.id.navigation_login
@@ -39,5 +34,13 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        userPreferences.authToken.asLiveData().observe(this, Observer {
+            if (it == null) {
+                navController.navigate(R.id.navigation_login)
+            } else {
+                navController.navigate(R.id.navigation_profile)
+            }
+        })
     }
 }

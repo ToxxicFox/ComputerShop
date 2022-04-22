@@ -10,10 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RemoteDataSource{
 
-    companion object {
-        private const val BASE_URL = "https://qa.firecode.ru/api/"
-    }
-
     fun<Api> buildApi(
         api: Class<Api>
     ): Api {
@@ -23,7 +19,7 @@ class RemoteDataSource{
             .create()
 
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .client(OkHttpClient.Builder().also { client ->
                 if (BuildConfig.DEBUG) {
                     val logging = HttpLoggingInterceptor()

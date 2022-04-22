@@ -1,14 +1,11 @@
 package com.example.computershop.ui.profile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.computershop.R
@@ -18,7 +15,6 @@ import com.example.computershop.network.ResultValue
 import com.example.computershop.network.data.LoginRequestObject
 import com.example.computershop.repositories.AuthRepository
 import com.example.computershop.ui.base.BaseFragment
-import com.example.computershop.ui.base.ViewModelFactory
 import kotlinx.coroutines.launch
 
 const val TAG = "LOGIN_FRAGMENT"
@@ -35,14 +31,13 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
 
 
     override fun getFragmentRepository() =
-        AuthRepository(remoteDataSource.buildApi(AuthApi::class.java))
+        AuthRepository(remoteDataSource.buildApi(AuthApi::class.java), userPreferences)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
             viewModel = AuthViewModel(getFragmentRepository())
             loginFragment = this@LoginFragment
@@ -60,10 +55,8 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
         viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
             when(it) {
                 is ResultValue.Success -> {
-                    lifecycleScope.launch {
-                        userPreferences.saveAuthToken(it.value)
-                    }
-
+                    viewModel.saveAuthToken(it.value)
+                    findNavController().navigate(R.id.action_navigation_login_to_navigation_profile)
                 }
                 is ResultValue.Failure -> {
                     Toast.makeText(requireContext(), "Login Failure", Toast.LENGTH_SHORT).show()
