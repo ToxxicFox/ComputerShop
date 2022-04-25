@@ -31,7 +31,7 @@ class SignUpFragment : BaseFragment<AuthViewModel, FragmentSignUpBinding, AuthRe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
+        binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = AuthViewModel(getFragmentRepository())
             signUpFragment = this@SignUpFragment
@@ -54,9 +54,9 @@ class SignUpFragment : BaseFragment<AuthViewModel, FragmentSignUpBinding, AuthRe
 
         })
 
-        val email = binding.signEmail.text.toString()
-        val password = binding.signPassword.text.toString()
-        val passwordConfirmation = binding.confirmSignPassword.text.toString()
+        val email = binding?.signEmail?.text.toString()
+        val password = binding?.signPassword?.text.toString()
+        val passwordConfirmation = binding?.confirmSignPassword?.text.toString()
         val requestSignUpObject = SignUpRequestObject(email, password, passwordConfirmation)
 
         viewModel.signUp(requestSignUpObject)

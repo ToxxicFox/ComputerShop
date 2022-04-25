@@ -35,7 +35,7 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
+        binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = AuthViewModel(getFragmentRepository())
             loginFragment = this@LoginFragment
@@ -62,8 +62,8 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
             }
         })
 
-        val email = binding.signEmail.text.toString()
-        val password = binding.signPasswordLogin.text.toString()
+        val email = binding?.signEmail?.text.toString()
+        val password = binding?.signPasswordLogin?.text.toString()
         val deviceName = android.os.Build.MODEL
         val requestLoginObject = LoginRequestObject(email, password, deviceName)
 
