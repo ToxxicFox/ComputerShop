@@ -11,7 +11,7 @@ import com.example.computershop.R
 import com.example.computershop.databinding.FragmentSignUpBinding
 import com.example.computershop.network.AuthApi
 import com.example.computershop.network.ResultValue
-import com.example.computershop.network.data.models.SignUpRequestObject
+import com.example.computershop.network.data.models.requests.SignUpRequestObject
 import com.example.computershop.repositories.AuthRepository
 import com.example.computershop.ui.base.BaseFragment
 

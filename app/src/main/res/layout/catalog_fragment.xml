@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".ui.catalog.CatalogFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Catalog" />
+    <data>
+        <variable
+            name="catalogFragment"
+            type="com.example.computershop.ui.catalog.CatalogFragment" />
 
-</FrameLayout>
+        <variable
+            name="viewModel"
+            type="com.example.computershop.ui.catalog.CatalogViewModel" />
+    </data>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id = "@+id/catalogList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</layout>

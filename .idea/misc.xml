@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/activity_main.xml" value="0.21240942028985507" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/catalog_fragment.xml" value="0.22192028985507245" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/category_item.xml" value="0.264" />
         <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/fragment_login.xml" value="0.2359375" />
         <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/profile_fragment.xml" value="0.2" />

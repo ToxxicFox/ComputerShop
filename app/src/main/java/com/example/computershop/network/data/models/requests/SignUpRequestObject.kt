@@ -1,4 +1,4 @@
-package com.example.computershop.network.data.models
+package com.example.computershop.network.data.models.requests
 
 data class SignUpRequestObject(
     val email: String,

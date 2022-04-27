@@ -11,11 +11,9 @@ import com.example.computershop.R
 import com.example.computershop.databinding.FragmentLoginBinding
 import com.example.computershop.network.AuthApi
 import com.example.computershop.network.ResultValue
-import com.example.computershop.network.data.models.LoginRequestObject
+import com.example.computershop.network.data.models.requests.LoginRequestObject
 import com.example.computershop.repositories.AuthRepository
 import com.example.computershop.ui.base.BaseFragment
-
-const val TAG = "LOGIN_FRAGMENT"
 
 class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepository>() {
 

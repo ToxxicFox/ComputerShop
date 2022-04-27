@@ -1,32 +1,61 @@
 package com.example.computershop.ui.catalog
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.computershop.R
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.computershop.databinding.CatalogFragmentBinding
+import com.example.computershop.network.ResultValue
+import com.example.computershop.network.ShopApi
+import com.example.computershop.repositories.CatalogRepository
+import com.example.computershop.ui.adapters.CategoryViewAdapter
+import com.example.computershop.ui.base.BaseFragment
 
-class CatalogFragment : Fragment() {
+class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, CatalogRepository>() {
 
-    companion object {
-        fun newInstance() = CatalogFragment()
+    private val categoryAdapter = CategoryViewAdapter()
+
+    override fun getViewModel() = CatalogViewModel::class.java
+
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ) = CatalogFragmentBinding.inflate(inflater, container, false)
+
+    override fun getFragmentRepository() =
+        CatalogRepository(remoteDataSource.buildApi(ShopApi::class.java))
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initCategoryList(view)
+        initViewModel()
     }
 
-    private lateinit var viewModel: CatalogViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.catalog_fragment, container, false)
+    private fun initCategoryList(view: View) {
+        val listView = binding?.catalogList
+        listView?.layoutManager = LinearLayoutManager(activity)
+        listView?.adapter = categoryAdapter
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CatalogViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun initViewModel() {
+
+        viewModel.getCategories()
+        viewModel.categoryList.observe(viewLifecycleOwner, Observer {
+            when(it) {
+                is ResultValue.Success -> {
+                    categoryAdapter.setUpdateData(it.value.data)
+                }
+                is ResultValue.Failure -> {
+                    Toast.makeText(requireContext(), "List is empty", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
     }
 
 }

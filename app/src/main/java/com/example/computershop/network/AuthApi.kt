@@ -1,7 +1,7 @@
 package com.example.computershop.network
 
-import com.example.computershop.network.data.models.LoginRequestObject
-import com.example.computershop.network.data.models.SignUpRequestObject
+import com.example.computershop.network.data.models.requests.LoginRequestObject
+import com.example.computershop.network.data.models.requests.SignUpRequestObject
 import retrofit2.http.*
 
 interface AuthApi {

@@ -1,8 +1,8 @@
 package com.example.computershop.repositories
 
 import com.example.computershop.network.AuthApi
-import com.example.computershop.network.data.models.LoginRequestObject
-import com.example.computershop.network.data.models.SignUpRequestObject
+import com.example.computershop.network.data.models.requests.LoginRequestObject
+import com.example.computershop.network.data.models.requests.SignUpRequestObject
 
 class AuthRepository(
     private val api: AuthApi,

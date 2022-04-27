@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.computershop.network.ResultValue
-import com.example.computershop.network.data.models.LoginRequestObject
-import com.example.computershop.network.data.models.SignUpRequestObject
+import com.example.computershop.network.data.models.requests.LoginRequestObject
+import com.example.computershop.network.data.models.requests.SignUpRequestObject
 import com.example.computershop.repositories.AuthRepository
 import kotlinx.coroutines.launch
 

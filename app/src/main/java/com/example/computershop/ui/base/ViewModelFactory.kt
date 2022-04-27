@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.computershop.repositories.AuthRepository
 import com.example.computershop.repositories.BaseRepository
+import com.example.computershop.repositories.CatalogRepository
+import com.example.computershop.ui.catalog.CatalogViewModel
 import com.example.computershop.ui.profile.AuthViewModel
 import java.lang.IllegalArgumentException
 
@@ -16,6 +18,10 @@ class ViewModelFactory(
         return when{
             modelClass.isAssignableFrom(AuthViewModel::class.java) ->
                 AuthViewModel(repository as AuthRepository) as T
+
+            modelClass.isAssignableFrom(CatalogViewModel::class.java) ->
+                CatalogViewModel(repository as CatalogRepository) as T
+
             else -> throw IllegalArgumentException("ViewModel not found")
         }
 
