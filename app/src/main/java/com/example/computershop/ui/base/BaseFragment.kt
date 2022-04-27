@@ -12,10 +12,11 @@ import com.example.computershop.network.RemoteDataSource
 import com.example.computershop.repositories.BaseRepository
 import com.example.computershop.repositories.UserPreferences
 
-abstract class BaseFragment<VM: ViewModel, B: ViewBinding, R: BaseRepository> : Fragment() {
+abstract class BaseFragment<tViewModel: ViewModel, binding: ViewBinding, repository: BaseRepository>
+    : Fragment() {
 
-    protected lateinit var binding: B
-    protected lateinit var viewModel: VM
+    protected lateinit var binding: binding
+    protected lateinit var viewModel: tViewModel
     protected val remoteDataSource = RemoteDataSource()
     protected lateinit var userPreferences: UserPreferences
 
@@ -31,9 +32,9 @@ abstract class BaseFragment<VM: ViewModel, B: ViewBinding, R: BaseRepository> : 
         return binding.root
     }
 
-    abstract fun getViewModel() : Class<VM>
+    abstract fun getViewModel() : Class<tViewModel>
 
-    abstract fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?) : B
+    abstract fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?) : binding
 
-    abstract fun getFragmentRepository(): R
+    abstract fun getFragmentRepository(): repository
 }

@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="loginFragment"
-            type="com.example.computershop.ui.profile.LoginFragment" />
+            name="signUpFragment"
+            type="com.example.computershop.ui.profile.SignUpFragment" />
     </data>
 
     <ScrollView
@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/sign_up"
+                android:onClick="@{() -> signUpFragment.signUp()}"
                 android:layout_gravity="center"/>
 
             <ProgressBar
