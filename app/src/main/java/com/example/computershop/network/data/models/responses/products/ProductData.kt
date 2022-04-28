@@ -1,6 +1,6 @@
 package com.example.computershop.network.data.models.responses.products
 
-data class Data(
+data class ProductData(
     val category: Category,
     val discount: Int,
     val id: Int,

@@ -14,7 +14,7 @@ class CategoryViewAdapter: RecyclerView.Adapter<CategoryViewAdapter.CatalogViewH
     private var categoryItems = ArrayList<CategoryData>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setUpdateData(categoryItems: ArrayList<CategoryData>){
+    fun setUpdateCategory(categoryItems: ArrayList<CategoryData>){
         this.categoryItems = categoryItems
         notifyDataSetChanged()
     }
@@ -22,11 +22,9 @@ class CategoryViewAdapter: RecyclerView.Adapter<CategoryViewAdapter.CatalogViewH
     class CatalogViewHolder(view: View): RecyclerView.ViewHolder(view){
 
         private val categoryTitle: TextView = view.findViewById(R.id.categoryTitle)
-        private val categoryInfo: TextView = view.findViewById(R.id.categoryInfo)
 
         fun bind(data: CategoryData) {
             categoryTitle.text = data.title
-            categoryInfo.text = data.info
         }
     }
 

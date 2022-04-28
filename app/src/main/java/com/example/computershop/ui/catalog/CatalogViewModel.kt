@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.computershop.network.ResultValue
 import com.example.computershop.network.data.models.responses.categories.CategoryResponse
+import com.example.computershop.network.data.models.responses.products.ProductsResponse
 import com.example.computershop.repositories.CatalogRepository
 import kotlinx.coroutines.launch
 
@@ -21,10 +22,19 @@ class CatalogViewModel(
     val categoryList: LiveData<ResultValue<CategoryResponse>>
         get() = categoryListLiveData
 
+    private val productListLiveData: MutableLiveData<ResultValue<ProductsResponse>> = MutableLiveData()
+    val productList: LiveData<ResultValue<ProductsResponse>>
+        get() = productListLiveData
+
 
     fun getCategories() = viewModelScope.launch {
         categoryListLiveData.value = repository.getCategories()
-        Log.d(TAG, categoryList.toString())
+    }
+
+    fun getProducts() = viewModelScope.launch {
+        productListLiveData.value = repository.getProducts()
+        val response = productList.value
+        Log.d(TAG, response.toString())
     }
 
 }

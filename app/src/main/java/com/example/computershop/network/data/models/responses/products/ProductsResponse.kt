@@ -1,7 +1,7 @@
 package com.example.computershop.network.data.models.responses.products
 
-data class ProductsResponseObject(
-    val `data`: List<Data>,
+data class ProductsResponse(
+    val data: ArrayList<ProductData>,
     val links: Links,
     val meta: Meta
 )
