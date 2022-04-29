@@ -1,12 +1,12 @@
 package com.example.computershop.ui.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.net.toUri
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.computershop.R
 import com.example.computershop.network.data.models.responses.products.ProductData
@@ -14,14 +14,22 @@ import com.squareup.picasso.Picasso
 
 private const val EXT = ".jpg"
 
-class ProductViewAdapter: RecyclerView.Adapter<ProductViewAdapter.ProductViewHolder>() {
 
-    private var productItems = ArrayList<ProductData>()
+class ProductViewAdapter :
+    PagingDataAdapter<ProductData, ProductViewAdapter.ProductViewHolder>(DiffUtilCallBack()){
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun setUpdateProduct(productItems: ArrayList<ProductData>){
-        this.productItems = productItems
-        notifyDataSetChanged()
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        holder.bind(getItem(position)!!)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
+            ProductViewHolder {
+
+        val inflater =
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.product_item, parent, false)
+
+        return ProductViewHolder(inflater)
     }
 
     class ProductViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -42,19 +50,17 @@ class ProductViewAdapter: RecyclerView.Adapter<ProductViewAdapter.ProductViewHol
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val view =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.product_item, parent, false)
+    class DiffUtilCallBack: DiffUtil.ItemCallback<ProductData>() {
 
-        return ProductViewHolder(view)
+        override fun areItemsTheSame(oldItem: ProductData, newItem: ProductData): Boolean {
+            return oldItem.title == newItem.title
+        }
+
+        override fun areContentsTheSame(oldItem: ProductData, newItem: ProductData): Boolean {
+            return oldItem.title == newItem.title
+                    && oldItem.price == newItem.price
+        }
+
     }
 
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bind(productItems.get(position))
-    }
-
-    override fun getItemCount(): Int {
-        return productItems.size
-    }
 }

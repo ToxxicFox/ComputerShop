@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="4dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/productView"
@@ -33,10 +34,12 @@
                 android:id="@+id/productTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:fontFamily="@font/roboto"
                 android:text="AMD"
+                android:layout_gravity="center"
+                android:textAlignment="center"
                 android:textColor="@color/white"
-                android:layout_margin="8dp"
                 android:textSize="16sp" />
 
             <LinearLayout

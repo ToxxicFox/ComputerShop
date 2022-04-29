@@ -10,8 +10,8 @@ class CatalogRepository(
         api.getCategories()
     }
 
-    suspend fun getProducts() = safeApiCall {
-        api.getProducts()
+    suspend fun getProducts(nextPage: Int) = safeApiCall {
+        api.getProducts(nextPage)
     }
 
 }
