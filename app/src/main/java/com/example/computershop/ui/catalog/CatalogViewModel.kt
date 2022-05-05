@@ -14,6 +14,7 @@ import com.example.computershop.network.data.models.responses.products.ProductDa
 import com.example.computershop.repositories.CatalogRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import java.text.FieldPosition
 
 
 class CatalogViewModel(

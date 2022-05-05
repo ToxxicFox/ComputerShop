@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.computershop.R
 import com.example.computershop.databinding.CatalogFragmentBinding
 import com.example.computershop.network.ResultValue
 import com.example.computershop.network.ShopApi
@@ -17,8 +19,9 @@ import com.example.computershop.repositories.CatalogRepository
 import com.example.computershop.ui.adapters.CategoryViewAdapter
 import com.example.computershop.ui.adapters.ProductViewAdapter
 import com.example.computershop.ui.base.BaseFragment
+import com.example.computershop.ui.listeners.OnProductItemClickListener
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, CatalogRepository>() {
 
@@ -43,6 +46,16 @@ class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, C
         initProductAdapter()
         displayCategoryList()
         displayProductList()
+
+        val bundle = Bundle()
+
+        productAdapter.setOnItemClickListener(object : OnProductItemClickListener {
+            override fun onItemClick(position: Int) {
+                val productData = Gson().toJson(productAdapter.snapshot()[position])
+                bundle.putSerializable("ProductItem", productData)
+                findNavController().navigate(R.id.productFragment, bundle)
+            }
+        })
     }
 
     private fun initCategoryAdapter() {

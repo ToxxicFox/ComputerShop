@@ -7,4 +7,5 @@
     <string name="sign_up_solicitation">Регистрация</string>
     <string name="confirm_password">Повторите пароль</string>
     <string name="welcome">Добро пожаловать!</string>
+    <string name="add_to_cart">Добавить в корзину</string>
 </resources>
