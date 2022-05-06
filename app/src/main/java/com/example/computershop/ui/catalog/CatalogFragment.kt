@@ -52,7 +52,7 @@ class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, C
         productAdapter.setOnItemClickListener(object : OnProductItemClickListener {
             override fun onItemClick(position: Int) {
                 val productData = Gson().toJson(productAdapter.snapshot()[position])
-                bundle.putSerializable("ProductItem", productData)
+                bundle.putString("ProductItem", productData)
                 findNavController().navigate(R.id.productFragment, bundle)
             }
         })

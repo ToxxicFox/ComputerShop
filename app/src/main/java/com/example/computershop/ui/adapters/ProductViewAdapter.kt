@@ -54,6 +54,7 @@ class ProductViewAdapter :
 
             Glide.with(productImage)
                 .load(url)
+                .timeout(6000000)
                 .into(productImage)
         }
 
