@@ -22,6 +22,7 @@ import com.example.computershop.ui.base.BaseFragment
 import com.example.computershop.ui.listeners.OnProductItemClickListener
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, CatalogRepository>() {
 
@@ -90,13 +91,11 @@ class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, C
     }
 
     private fun displayProductList() {
-
-        lifecycleScope.launchWhenCreated {
-            viewModel.getProducts().collectLatest {
+        lifecycleScope.launch {
+            viewModel.products.collectLatest {
                 productAdapter.submitData(it)
             }
         }
-
     }
 
 }

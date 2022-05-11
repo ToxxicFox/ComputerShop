@@ -1,6 +1,7 @@
 package com.example.computershop.ui.catalog
 
 import android.net.Uri
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.computershop.network.ResultValue
@@ -11,23 +12,27 @@ import java.lang.Exception
 class ProductPagingSource (private val repository: CatalogRepository): PagingSource<Int, ProductData>() {
 
     override fun getRefreshKey(state: PagingState<Int, ProductData>): Int? {
-        return state.anchorPosition
+        val anchorPosition = state.anchorPosition ?: return null
+        val page = state.closestPageToPosition(anchorPosition) ?: return null
+        return page.prevKey?.plus(1) ?: page.nextKey?.minus(1)
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductData> {
         val nextPage = params.key ?: FIRST_PAGE_INDEX
         val response = repository.getProducts(nextPage)
-        var nextPageNumber: Int? = null
+        var lastPageNumber: Int? = null
         lateinit var data: ArrayList<ProductData>
 
         return try {
             if (response is ResultValue.Success){
-                val uri = Uri.parse(response.value.links.next)
-                val nextPageParameter = uri.getQueryParameter("page")
-                nextPageNumber = nextPageParameter?.toInt()
+                val uri = Uri.parse(response.value.links.last)
+                val lastPageParameter = uri.getQueryParameter("page")
+                lastPageNumber = lastPageParameter?.toInt()
                 data = response.value.data
             }
-            LoadResult.Page(data = data, prevKey = null, nextKey = nextPageNumber)
+            LoadResult.Page(data = data,
+                prevKey = if (nextPage == 1) null else nextPage-1,
+                nextKey = if (nextPage == lastPageNumber) null else nextPage+1)
         }
         catch (e: Exception) {
             LoadResult.Error(e)
