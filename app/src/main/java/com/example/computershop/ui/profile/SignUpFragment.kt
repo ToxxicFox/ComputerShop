@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.computershop.R
 import com.example.computershop.databinding.FragmentSignUpBinding
 import com.example.computershop.network.AuthApi
 import com.example.computershop.network.ResultValue
-import com.example.computershop.network.data.models.requests.SignUpRequestObject
+import com.example.computershop.network.data.models.requests.SignUpRequest
 import com.example.computershop.repositories.AuthRepository
 import com.example.computershop.ui.base.BaseFragment
 
@@ -32,32 +31,31 @@ class SignUpFragment : BaseFragment<AuthViewModel, FragmentSignUpBinding, AuthRe
         super.onViewCreated(view, savedInstanceState)
 
         binding?.apply {
-            lifecycleOwner = viewLifecycleOwner
-            viewModel = AuthViewModel(getFragmentRepository())
             signUpFragment = this@SignUpFragment
         }
     }
 
     fun signUp() {
 
-        viewModel.token.observe(viewLifecycleOwner, Observer {
+        viewModel.token.observe(viewLifecycleOwner) {
 
-            when(it) {
+            when (it) {
                 is ResultValue.Success -> {
                     viewModel.saveAuthToken(it.value)
                     findNavController().navigate(R.id.action_navigation_sign_up_to_navigation_profile)
                 }
                 is ResultValue.Failure -> {
-                    Toast.makeText(requireContext(), "Registration Failure", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Registration Failure", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
 
-        })
+        }
 
         val email = binding?.signEmail?.text.toString()
         val password = binding?.signPassword?.text.toString()
         val passwordConfirmation = binding?.confirmSignPassword?.text.toString()
-        val requestSignUpObject = SignUpRequestObject(email, password, passwordConfirmation)
+        val requestSignUpObject = SignUpRequest(email, password, passwordConfirmation)
 
         viewModel.signUp(requestSignUpObject)
 

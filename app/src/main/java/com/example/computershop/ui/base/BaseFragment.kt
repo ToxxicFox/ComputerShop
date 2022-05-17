@@ -29,7 +29,7 @@ abstract class BaseFragment<tViewModel: ViewModel, binding: ViewBinding, reposit
         binding = getFragmentBinding(inflater, container)
         val factory = ViewModelFactory(getFragmentRepository())
         viewModel = ViewModelProvider(this, factory).get(getViewModel())
-        return binding!!.root
+        return binding?.root
     }
 
     abstract fun getViewModel() : Class<tViewModel>

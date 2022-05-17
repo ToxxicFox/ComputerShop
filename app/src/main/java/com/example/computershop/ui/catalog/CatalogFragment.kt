@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,7 +21,6 @@ import com.example.computershop.ui.base.BaseFragment
 import com.example.computershop.ui.listeners.OnProductItemClickListener
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, CatalogRepository>() {
 
@@ -43,12 +41,12 @@ class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, C
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val bundle = Bundle()
+
         initCategoryAdapter()
         initProductAdapter()
         displayCategoryList()
         displayProductList()
-
-        val bundle = Bundle()
 
         productAdapter.setOnItemClickListener(object : OnProductItemClickListener {
             override fun onItemClick(position: Int) {
@@ -75,10 +73,8 @@ class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, C
 
     private fun displayCategoryList() {
 
-        viewModel.getCategories()
-
-        viewModel.categoryList.observe(viewLifecycleOwner, Observer {
-            when(it) {
+        viewModel.categoryList.observe(viewLifecycleOwner) {
+            when (it) {
                 is ResultValue.Success -> {
                     categoryAdapter.setUpdateCategory(it.value.data)
                 }
@@ -86,12 +82,12 @@ class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, C
                     Toast.makeText(requireContext(), "List is empty", Toast.LENGTH_SHORT).show()
                 }
             }
-        })
+        }
 
     }
 
     private fun displayProductList() {
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenCreated {
             viewModel.products.collectLatest {
                 productAdapter.submitData(it)
             }

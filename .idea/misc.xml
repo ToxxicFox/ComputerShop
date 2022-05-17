@@ -3,10 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/drawable/ic_filter.xml" value="0.2425" />
         <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/activity_main.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/catalog_fragment.xml" value="0.264" />
         <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/category_item.xml" value="1.0" />
-        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/fragment_login.xml" value="0.2359375" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/fragment_product.xml" value="0.23233695652173914" />
         <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/product_item.xml" value="0.4" />

@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/auth_padding">
 
             <EditText
                 android:id="@+id/sign_email"
@@ -30,7 +30,7 @@
                 android:id="@+id/sign_password_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/auth_padding"
                 android:hint="@string/password"
                 android:inputType="textPassword"/>
 
@@ -38,7 +38,7 @@
                 android:id="@+id/btn_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/auth_padding"
                 android:layout_gravity="center"
                 android:onClick="@{() -> loginFragment.login()}"
                 android:text="@string/login"/>
@@ -48,17 +48,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/auth_padding"
                 android:background="@color/cardview_shadow_start_color"
                 android:onClick="@{() -> loginFragment.goToSignUp()}"
                 android:text="@string/sign_up_solicitation"
                 android:textColor="#6D4C41" />
-
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
 
         </LinearLayout>
     </ScrollView>

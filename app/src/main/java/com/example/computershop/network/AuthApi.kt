@@ -1,7 +1,7 @@
 package com.example.computershop.network
 
-import com.example.computershop.network.data.models.requests.LoginRequestObject
-import com.example.computershop.network.data.models.requests.SignUpRequestObject
+import com.example.computershop.network.data.models.requests.LoginRequest
+import com.example.computershop.network.data.models.requests.SignUpRequest
 import retrofit2.http.*
 
 interface AuthApi {
@@ -9,12 +9,12 @@ interface AuthApi {
     @POST("auth/get_token")
     @Headers("Content-Type: application/json")
     suspend fun login(
-        @Body user: LoginRequestObject
+        @Body user: LoginRequest
     ) : String
 
     @POST("practice/shop/registration")
     @Headers("Content-Type: application/json")
     suspend fun signUp(
-        @Body user: SignUpRequestObject
+        @Body user: SignUpRequest
     ) : String
 }

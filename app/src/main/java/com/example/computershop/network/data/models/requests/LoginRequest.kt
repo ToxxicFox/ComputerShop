@@ -1,7 +1,9 @@
 package com.example.computershop.network.data.models.requests
 
-data class SignUpRequestObject(
+import retrofit2.http.Field
+
+data class LoginRequest(
     val email: String,
     val password: String,
-    val password_confirmation: String
+    val device_name: String
 )

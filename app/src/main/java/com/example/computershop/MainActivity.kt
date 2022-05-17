@@ -1,17 +1,13 @@
 package com.example.computershop
 
 import android.os.Bundle
-import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.asLiveData
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.computershop.databinding.ActivityMainBinding
-import com.example.computershop.repositories.UserPreferences
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -23,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
-        val userPreferences = UserPreferences(this)
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
@@ -34,13 +29,5 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        userPreferences.authToken.asLiveData().observe(this, Observer {
-            if (it == null) {
-                navController.navigate(R.id.navigation_login)
-            } else {
-                navController.navigate(R.id.navigation_profile)
-            }
-        })
     }
 }

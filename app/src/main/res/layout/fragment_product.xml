@@ -9,10 +9,10 @@
 
     <ImageView
         android:id="@+id/productPageImg"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="@dimen/product_image_width"
+        android:layout_height="@dimen/product_image_height"
+        android:layout_marginStart="@dimen/product_image_margin"
+        android:layout_marginTop="@dimen/product_image_margin"
         android:src="@android:drawable/ic_menu_gallery"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
         android:fontFamily="@font/roboto_bold"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:text="AMD FX-4300 OEM"
+        android:text="@string/product_title"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -43,7 +43,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/roboto_bold"
-        android:text="2499"
+        android:text="@string/product_price"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto"
-                    android:text="@string/lorem"
+                    android:text="@string/product_info"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20sp" />

@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/auth_padding">
 
             <EditText
                 android:id="@+id/sign_email"
@@ -30,7 +30,7 @@
                 android:id="@+id/sign_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/auth_padding"
                 android:hint="@string/password"
                 android:inputType="textPassword"/>
 
@@ -38,7 +38,7 @@
                 android:id="@+id/confirm_sign_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/auth_padding"
                 android:hint="@string/confirm_password"
                 android:inputType="textPassword"/>
 
@@ -46,17 +46,10 @@
                 android:id="@+id/btn_sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/auth_padding"
                 android:text="@string/sign_up"
                 android:onClick="@{() -> signUpFragment.signUp()}"
                 android:layout_gravity="center"/>
-
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:visibility="gone"/>
 
         </LinearLayout>
     </ScrollView>

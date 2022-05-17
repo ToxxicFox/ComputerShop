@@ -13,7 +13,7 @@ import com.example.computershop.R
 import com.example.computershop.network.data.models.responses.products.ProductData
 import com.example.computershop.ui.listeners.OnProductItemClickListener
 
-private const val EXT = ".jpg"
+private const val EXTENSION = ".jpg"
 private const val RUB = "₽"
 
 
@@ -50,7 +50,7 @@ class ProductViewAdapter :
         fun bind(data: ProductData) {
             productTitle.text = data.title
             productPrice.text = data.price.toString() + RUB
-            val url = data.img + EXT
+            val url = data.img + EXTENSION
 
             Glide.with(productImage)
                 .load(url)

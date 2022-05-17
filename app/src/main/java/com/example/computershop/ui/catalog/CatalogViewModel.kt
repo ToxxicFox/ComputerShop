@@ -22,8 +22,12 @@ class CatalogViewModel(
         ProductPagingSource(repository)
     }).flow.cachedIn(viewModelScope)
 
-    fun getCategories() = viewModelScope.launch {
+    private fun getCategories() = viewModelScope.launch {
         categoryListLiveData.value = repository.getCategories()
+    }
+
+    init {
+        getCategories()
     }
 
 }
