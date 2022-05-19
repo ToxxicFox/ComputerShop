@@ -14,4 +14,9 @@ class CatalogRepository(
         api.getProducts(nextPage)
     }
 
+    suspend fun getProductsById(categoryId: Int, nextPage: Int) =
+        safeApiCall {
+            api.getProductsById(categoryId, nextPage)
+        }
+
 }

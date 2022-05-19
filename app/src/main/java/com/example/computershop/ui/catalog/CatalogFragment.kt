@@ -18,6 +18,7 @@ import com.example.computershop.repositories.CatalogRepository
 import com.example.computershop.ui.adapters.CategoryViewAdapter
 import com.example.computershop.ui.adapters.ProductViewAdapter
 import com.example.computershop.ui.base.BaseFragment
+import com.example.computershop.ui.listeners.OnCategoryItemClickListener
 import com.example.computershop.ui.listeners.OnProductItemClickListener
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.collectLatest
@@ -55,6 +56,14 @@ class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, C
                 findNavController().navigate(R.id.productFragment, bundle)
             }
         })
+
+        categoryAdapter.setOnItemClickListener(object : OnCategoryItemClickListener{
+            override fun onItemClick(position: Int) {
+                viewModel.getCategoryId(categoryAdapter.categoryItems[position].id)
+                viewModel.getProductsByCategory()
+                displayProductList()
+            }
+        })
     }
 
     private fun initCategoryAdapter() {
@@ -87,11 +96,10 @@ class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, C
     }
 
     private fun displayProductList() {
-        lifecycleScope.launchWhenCreated {
-            viewModel.products.collectLatest {
+        lifecycleScope.launchWhenStarted {
+            viewModel.products?.collectLatest {
                 productAdapter.submitData(it)
             }
         }
     }
-
 }

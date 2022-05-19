@@ -11,6 +11,10 @@ interface ShopApi {
     suspend fun getCategories(): CategoryResponse
 
     @GET("practice/shop/v1/products")
-    suspend fun getProducts(@Query("page") query: Int): ProductsResponse
+    suspend fun getProducts(@Query("page") page: Int): ProductsResponse
+
+    @GET("practice/shop/v1/products")
+    suspend fun getProductsById(@Query("filter[category_id]") categoryId: Int,
+                                        @Query("page") page: Int): ProductsResponse
 
 }

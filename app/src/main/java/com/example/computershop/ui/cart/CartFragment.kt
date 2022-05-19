@@ -1,32 +1,20 @@
 package com.example.computershop.ui.cart
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.example.computershop.R
+import com.example.computershop.databinding.CartFragmentBinding
+import com.example.computershop.network.ShopApi
+import com.example.computershop.repositories.CartRepository
+import com.example.computershop.ui.base.BaseFragment
 
-class CartFragment : Fragment() {
+class CartFragment: BaseFragment<CartViewModel, CartFragmentBinding, CartRepository>(){
+    override fun getViewModel() = CartViewModel::class.java
 
-    companion object {
-        fun newInstance() = CartFragment()
-    }
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ) = CartFragmentBinding.inflate(inflater, container, false)
 
-    private lateinit var viewModel: CartViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.cart_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CartViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
+    override fun getFragmentRepository() =
+        CartRepository(remoteDataSource.buildApi(ShopApi::class.java))
 }

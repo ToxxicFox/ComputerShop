@@ -1,12 +1,12 @@
 package com.example.computershop.ui.catalog
 
 import androidx.lifecycle.*
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
+import androidx.paging.*
 import com.example.computershop.network.ResultValue
 import com.example.computershop.network.data.models.responses.categories.CategoryResponse
+import com.example.computershop.network.data.models.responses.products.ProductData
 import com.example.computershop.repositories.CatalogRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 
@@ -14,16 +14,45 @@ class CatalogViewModel(
     private val repository: CatalogRepository
 ) : ViewModel() {
 
-    private val categoryListLiveData: MutableLiveData<ResultValue<CategoryResponse>> = MutableLiveData()
+    private var categoryId: Int? = null
+
+    private val categoryListLiveData: MutableLiveData<ResultValue<CategoryResponse>> =
+        MutableLiveData()
     val categoryList: LiveData<ResultValue<CategoryResponse>>
         get() = categoryListLiveData
 
-    val products = Pager(config = PagingConfig(pageSize = 12, maxSize = 45), pagingSourceFactory = {
-        ProductPagingSource(repository)
-    }).flow.cachedIn(viewModelScope)
+    var products: Flow<PagingData<ProductData>>? = Pager(config = PagingConfig(pageSize = 12, maxSize = 85),
+        pagingSourceFactory = {
+            ProductPagingSource(repository, setCategoryId()) }).flow.cachedIn(viewModelScope)
 
     private fun getCategories() = viewModelScope.launch {
         categoryListLiveData.value = repository.getCategories()
+    }
+
+    fun getCategoryId(id: Int?) {
+        categoryId = if (categoryId == id) {
+            null
+        } else {
+            id
+        }
+    }
+
+    private fun setCategoryId(): Int? {
+        return this.categoryId
+    }
+
+    private fun isCategoryIdNull(): Boolean {
+        return categoryId == null
+    }
+
+    fun getProductsByCategory() {
+        if (isCategoryIdNull()) {
+            products = null
+        }
+        products =  Pager(config = PagingConfig(pageSize = 12, maxSize = 85),
+            pagingSourceFactory = {
+                ProductPagingSource(repository, setCategoryId())
+            }).flow.cachedIn(viewModelScope)
     }
 
     init {

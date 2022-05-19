@@ -1,15 +1,16 @@
 package com.example.computershop.ui.catalog
 
 import android.net.Uri
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.computershop.network.ResultValue
 import com.example.computershop.network.data.models.responses.products.ProductData
+import com.example.computershop.network.data.models.responses.products.ProductsResponse
 import com.example.computershop.repositories.CatalogRepository
 import java.lang.Exception
 
-class ProductPagingSource (private val repository: CatalogRepository): PagingSource<Int, ProductData>() {
+class ProductPagingSource (private val repository: CatalogRepository,
+                           private val categoryItemId: Int?): PagingSource<Int, ProductData>() {
 
     override fun getRefreshKey(state: PagingState<Int, ProductData>): Int? {
         val anchorPosition = state.anchorPosition ?: return null
@@ -19,7 +20,9 @@ class ProductPagingSource (private val repository: CatalogRepository): PagingSou
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductData> {
         val nextPage = params.key ?: FIRST_PAGE_INDEX
-        val response = repository.getProducts(nextPage)
+        val response: ResultValue<ProductsResponse> =
+            categoryItemId?.let { repository.getProductsById(it, nextPage) }
+                ?: repository.getProducts(nextPage)
         var lastPageNumber: Int? = null
         lateinit var data: ArrayList<ProductData>
 
