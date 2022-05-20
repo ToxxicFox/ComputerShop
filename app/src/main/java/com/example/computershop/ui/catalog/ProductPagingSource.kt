@@ -21,7 +21,7 @@ class ProductPagingSource (private val repository: CatalogRepository,
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductData> {
         val nextPage = params.key ?: FIRST_PAGE_INDEX
         val response: ResultValue<ProductsResponse> =
-            categoryItemId?.let { repository.getProductsById(it, nextPage) }
+            categoryItemId?.let { repository.getProductsByCategories(it, nextPage) }
                 ?: repository.getProducts(nextPage)
         var lastPageNumber: Int? = null
         lateinit var data: ArrayList<ProductData>

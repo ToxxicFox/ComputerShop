@@ -1,30 +1,20 @@
 package com.example.computershop.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.computershop.R
+import com.example.computershop.databinding.ProductItemBinding
 import com.example.computershop.network.data.models.responses.products.ProductData
-import com.example.computershop.ui.listeners.OnProductItemClickListener
 
 private const val EXTENSION = ".jpg"
 private const val RUB = "₽"
 
 
-class ProductViewAdapter :
+class ProductViewAdapter(private val action: (Int) -> Unit) :
     PagingDataAdapter<ProductData, ProductViewAdapter.ProductViewHolder>(DiffUtilCallBack()){
-
-    private lateinit var productListener: OnProductItemClickListener
-
-    fun setOnItemClickListener(listener: OnProductItemClickListener) {
-        productListener = listener
-    }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
@@ -33,34 +23,27 @@ class ProductViewAdapter :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             ProductViewHolder {
 
-        val inflater =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.product_item, parent, false)
+        val productItemBinding =
+            ProductItemBinding.inflate(LayoutInflater.from(parent.context),parent, false)
 
-        return ProductViewHolder(inflater, productListener)
+        return ProductViewHolder(productItemBinding, action)
     }
 
-    class ProductViewHolder(view: View, listener: OnProductItemClickListener)
-        : RecyclerView.ViewHolder(view){
-
-        private val productImage: ImageView = view.findViewById(R.id.productImg)
-        private val productTitle: TextView = view.findViewById(R.id.productTitle)
-        private val productPrice: TextView = view.findViewById(R.id.productPrice)
+    class ProductViewHolder(val binding: ProductItemBinding, private val action: (Int) -> Unit)
+        : RecyclerView.ViewHolder(binding.root){
 
         fun bind(data: ProductData) {
-            productTitle.text = data.title
-            productPrice.text = data.price.toString() + RUB
+            binding.productTitle.text = data.title
+            binding.productPrice.text = data.price.toString() + RUB
             val url = data.img + EXTENSION
 
-            Glide.with(productImage)
+            Glide.with(binding.productImg)
                 .load(url)
                 .timeout(6000000)
-                .into(productImage)
-        }
+                .into(binding.productImg)
 
-        init {
-            itemView.setOnClickListener {
-                listener.onItemClick(absoluteAdapterPosition)
+            binding.root.setOnClickListener {
+                action.invoke(absoluteAdapterPosition)
             }
         }
     }

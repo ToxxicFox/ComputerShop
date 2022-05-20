@@ -1,7 +1,13 @@
 package com.example.computershop.ui.catalog
 
-import androidx.lifecycle.*
-import androidx.paging.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import com.example.computershop.network.ResultValue
 import com.example.computershop.network.data.models.responses.categories.CategoryResponse
 import com.example.computershop.network.data.models.responses.products.ProductData
@@ -21,9 +27,11 @@ class CatalogViewModel(
     val categoryList: LiveData<ResultValue<CategoryResponse>>
         get() = categoryListLiveData
 
-    var products: Flow<PagingData<ProductData>>? = Pager(config = PagingConfig(pageSize = 12, maxSize = 85),
+    var products: Flow<PagingData<ProductData>>? =
+        Pager(config = PagingConfig(pageSize, maxSize),
         pagingSourceFactory = {
-            ProductPagingSource(repository, setCategoryId()) }).flow.cachedIn(viewModelScope)
+            ProductPagingSource(repository, setCategoryId())
+        }).flow.cachedIn(viewModelScope)
 
     private fun getCategories() = viewModelScope.launch {
         categoryListLiveData.value = repository.getCategories()
@@ -49,7 +57,7 @@ class CatalogViewModel(
         if (isCategoryIdNull()) {
             products = null
         }
-        products =  Pager(config = PagingConfig(pageSize = 12, maxSize = 85),
+        products =  Pager(config = PagingConfig(pageSize, maxSize),
             pagingSourceFactory = {
                 ProductPagingSource(repository, setCategoryId())
             }).flow.cachedIn(viewModelScope)
@@ -57,6 +65,11 @@ class CatalogViewModel(
 
     init {
         getCategories()
+    }
+
+    companion object {
+        const val pageSize = 12
+        const val maxSize = 85
     }
 
 }

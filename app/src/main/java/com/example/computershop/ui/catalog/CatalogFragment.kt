@@ -18,15 +18,14 @@ import com.example.computershop.repositories.CatalogRepository
 import com.example.computershop.ui.adapters.CategoryViewAdapter
 import com.example.computershop.ui.adapters.ProductViewAdapter
 import com.example.computershop.ui.base.BaseFragment
-import com.example.computershop.ui.listeners.OnCategoryItemClickListener
-import com.example.computershop.ui.listeners.OnProductItemClickListener
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.collectLatest
 
 class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, CatalogRepository>() {
 
-    private val categoryAdapter = CategoryViewAdapter()
-    private val productAdapter = ProductViewAdapter()
+    private val categoryAdapter = CategoryViewAdapter(action = ::onFilterClick)
+    private val productAdapter = ProductViewAdapter(action = ::onProductClick)
+    private val bundle = Bundle()
 
     override fun getViewModel() = CatalogViewModel::class.java
 
@@ -41,29 +40,21 @@ class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, C
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val bundle = Bundle()
-
         initCategoryAdapter()
         initProductAdapter()
         displayCategoryList()
         displayProductList()
+    }
 
-        productAdapter.setOnItemClickListener(object : OnProductItemClickListener {
-            override fun onItemClick(position: Int) {
-                val productData = Gson().toJson(productAdapter.snapshot()[position])
-                bundle.putString("ProductItem", productData)
-                findNavController().navigate(R.id.productFragment, bundle)
-            }
-        })
+    private fun onFilterClick(id:Int){
+        viewModel.getCategoryId(id)
+        viewModel.getProductsByCategory()
+        displayProductList()
+    }
 
-        categoryAdapter.setOnItemClickListener(object : OnCategoryItemClickListener{
-            override fun onItemClick(position: Int) {
-                viewModel.getCategoryId(categoryAdapter.categoryItems[position].id)
-                viewModel.getProductsByCategory()
-                displayProductList()
-            }
-        })
+    private fun onProductClick(position: Int){
+        bundle.putString("ProductItem", Gson().toJson(productAdapter.snapshot()[position]))
+        findNavController().navigate(R.id.productFragment, bundle)
     }
 
     private fun initCategoryAdapter() {
