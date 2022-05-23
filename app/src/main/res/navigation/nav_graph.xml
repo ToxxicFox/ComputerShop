@@ -18,7 +18,11 @@
         android:id="@+id/navigation_cart"
         android:name="com.example.computershop.ui.cart.CartFragment"
         android:label="cart_fragment"
-        tools:layout="@layout/cart_fragment" />
+        tools:layout="@layout/cart_fragment" >
+        <action
+            android:id="@+id/action_navigation_cart_to_navigation_login"
+            app:destination="@id/navigation_login" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.computershop.ui.profile.ProfileFragment"

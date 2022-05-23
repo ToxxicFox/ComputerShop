@@ -11,4 +11,5 @@
     <string name="product_title">AMD FX-4300 OEM</string>
     <string name="product_price">2499</string>
     <string name="product_info">Описание товара</string>
+    <string name="create_order">Оформить заказ</string>
 </resources>

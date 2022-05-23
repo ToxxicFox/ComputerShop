@@ -3,7 +3,7 @@ package com.example.computershop.network
 import com.example.computershop.network.data.models.requests.CartAddRequest
 import com.example.computershop.network.data.models.responses.cart.CartResponse
 import com.example.computershop.network.data.models.responses.cart.CartResponseAfterChanges
-import com.example.computershop.network.data.models.responses.cart.Data
+import com.example.computershop.network.data.models.responses.cart.CartData
 import com.example.computershop.network.data.models.responses.categories.CategoryResponse
 import com.example.computershop.network.data.models.responses.products.ProductsResponse
 import retrofit2.http.*
@@ -20,14 +20,17 @@ interface ShopApi {
     suspend fun getProductsByCategories(@Query("filter[category_id]") categoryId: Int,
                                         @Query("page") page: Int): ProductsResponse
 
-    @Headers("Accept: application/json","Content-Type: application/json")
+    @Headers(
+        "Accept: application/json",
+        "Content-Type: application/json"
+    )
     @GET("practice/shop/v1/basket")
     suspend fun getBasket(@Header("Authorization") token: String): CartResponse
 
     @Headers("Accept: application/json","Content-Type: application/json")
     @GET("practice/shop/v1/basket")
     suspend fun getItemFromBasket(@Header("Authorization") token: String,
-                                    @Path("id") basketId: Int): Data
+                                    @Path("id") basketId: Int): CartData
 
     @Headers("Accept: application/json","Content-Type: application/json")
     @POST("practice/shop/v1/basket")
