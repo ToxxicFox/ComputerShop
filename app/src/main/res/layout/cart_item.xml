@@ -43,14 +43,11 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnReduceQuantityOfCartItem"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:background="@drawable/button_cart_round_background_gradient"
-                android:text="-"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:background="@drawable/decrement" />
 
             <TextView
                 android:id="@+id/quantityOfCartItem"
@@ -63,14 +60,11 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnIncreaseQuantityOfCartItem"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:background="@drawable/button_cart_round_background_gradient"
-                android:text="+"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:background="@drawable/increment"/>
 
             <TextView
                 android:id="@+id/cartItemPrice"
@@ -84,4 +78,5 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

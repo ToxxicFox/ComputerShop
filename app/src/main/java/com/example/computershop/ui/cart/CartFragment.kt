@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.asLiveData
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.computershop.R
 import com.example.computershop.databinding.CartFragmentBinding
 import com.example.computershop.network.ResultValue
 import com.example.computershop.network.ShopApi
@@ -62,7 +60,9 @@ class CartFragment: BaseFragment<CartViewModel, CartFragmentBinding, CartReposit
             if (it != null) {
                 viewModel.getCart(it)
             } else {
-                findNavController().navigate(R.id.action_navigation_cart_to_navigation_login)
+                Toast.makeText(requireContext(),
+                    "Пожалуйста авторизуйтесь",
+                    Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -2,12 +2,10 @@ package com.example.computershop.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.computershop.repositories.AuthRepository
-import com.example.computershop.repositories.BaseRepository
-import com.example.computershop.repositories.CartRepository
-import com.example.computershop.repositories.CatalogRepository
+import com.example.computershop.repositories.*
 import com.example.computershop.ui.cart.CartViewModel
 import com.example.computershop.ui.catalog.CatalogViewModel
+import com.example.computershop.ui.catalog.ProductViewModel
 import com.example.computershop.ui.profile.AuthViewModel
 import java.lang.IllegalArgumentException
 
@@ -26,6 +24,9 @@ class ViewModelFactory(
 
             modelClass.isAssignableFrom(CartViewModel::class.java) ->
                 CartViewModel(repository as CartRepository) as T
+
+            modelClass.isAssignableFrom(ProductViewModel::class.java) ->
+                ProductViewModel(repository as ProductRepository) as T
 
             else -> throw IllegalArgumentException("ViewModel not found")
         }

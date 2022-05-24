@@ -20,13 +20,6 @@ class CartRepository(
         api.getItemFromBasket(token, basketItemId)
     }
 
-    suspend fun addItemToBasket(
-        token: String,
-        item: CartAddRequest
-    ) = safeApiCall {
-        api.addItemToBasket(token, item)
-    }
-
     suspend fun changeQuantityItemInBasket(
         token: String,
         basketItemId: Int,
