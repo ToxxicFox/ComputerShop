@@ -26,13 +26,14 @@ class ProductPagingSource (private val repository: CatalogRepository,
         var lastPageNumber: Int? = null
         lateinit var data: ArrayList<ProductData>
 
+        if (response is ResultValue.Success){
+            val uri = Uri.parse(response.value.links.last)
+            val lastPageParameter = uri.getQueryParameter("page")
+            lastPageNumber = lastPageParameter?.toInt()
+            data = response.value.data!!
+        }
+
         return try {
-            if (response is ResultValue.Success){
-                val uri = Uri.parse(response.value.links.last)
-                val lastPageParameter = uri.getQueryParameter("page")
-                lastPageNumber = lastPageParameter?.toInt()
-                data = response.value.data
-            }
             LoadResult.Page(data = data,
                 prevKey = if (nextPage == 1) null else nextPage-1,
                 nextKey = if (nextPage == lastPageNumber) null else nextPage+1)

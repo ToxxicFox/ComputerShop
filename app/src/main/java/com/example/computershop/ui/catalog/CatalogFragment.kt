@@ -76,7 +76,7 @@ class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, C
         viewModel.categoryList.observe(viewLifecycleOwner) {
             when (it) {
                 is ResultValue.Success -> {
-                    categoryAdapter.setUpdateCategory(it.value.data)
+                    it.value.data?.let { category -> categoryAdapter.setUpdateCategory(category) }
                 }
                 is ResultValue.Failure -> {
                     Toast.makeText(requireContext(), "List is empty", Toast.LENGTH_SHORT).show()
