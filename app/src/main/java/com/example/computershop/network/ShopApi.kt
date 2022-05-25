@@ -38,13 +38,13 @@ interface ShopApi {
                                 @Body item: CartAddRequest): CartResponseAfterChanges
 
     @Headers("Accept: application/json","Content-Type: application/json")
-    @PUT("practice/shop/v1/basket")
+    @PUT("practice/shop/v1/basket/{id}")
     suspend fun changeQuantityItemInBasket(@Header("Authorization") token: String,
                                            @Path("id") basketId: Int,
                                            @Body quantity: Int): CartResponseAfterChanges
 
     @Headers("Accept: application/json","Content-Type: application/json")
-    @DELETE("practice/shop/v1/basket")
+    @DELETE("practice/shop/v1/basket/{id}")
     suspend fun deleteItemFromBasket(@Header("Authorization") token: String,
                                      @Path("id") basketId: Int): CartResponseAfterChanges
 

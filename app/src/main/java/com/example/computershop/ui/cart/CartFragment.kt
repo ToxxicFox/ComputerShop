@@ -16,7 +16,7 @@ import com.example.computershop.ui.base.BaseFragment
 
 class CartFragment: BaseFragment<CartViewModel, CartFragmentBinding, CartRepository>(){
 
-    private val cartAdapter = CartViewAdapter()
+    private val cartAdapter = CartViewAdapter(action = ::deleteCartItem)
 
     override fun getViewModel() = CartViewModel::class.java
 
@@ -49,15 +49,22 @@ class CartFragment: BaseFragment<CartViewModel, CartFragmentBinding, CartReposit
                     cartAdapter.setUpdateCart(it.value.data)
                 }
                 is ResultValue.Failure -> {
-                    Toast.makeText(requireContext(), "List is empty", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(),
+                        "Упс... Что-то пошло не так",
+                        Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
 
+    private fun deleteCartItem(basketId: Int) {
+        viewModel.deleteItemFromCart(basketId)
+    }
+
     private fun checkToken() {
         userPreferences.authToken.asLiveData().observe(viewLifecycleOwner) {
             if (it != null) {
+                viewModel.getToken(it)
                 viewModel.getCart(it)
             } else {
                 Toast.makeText(requireContext(),

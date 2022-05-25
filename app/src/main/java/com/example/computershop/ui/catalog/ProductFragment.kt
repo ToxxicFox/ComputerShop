@@ -56,7 +56,7 @@ class ProductFragment :
         userPreferences.authToken.asLiveData().observe(viewLifecycleOwner){
             if (it != null) {
                 lifecycleScope.launchWhenCreated {
-                    viewModel.productRequest?.let { it1 -> viewModel.addToCart(it, it1) }
+                    viewModel.productRequest?.let { item -> viewModel.addToCart(it, item) }
                     Toast.makeText(requireContext(), viewModel.messageAdding, Toast.LENGTH_SHORT).show()
                 }
             } else {

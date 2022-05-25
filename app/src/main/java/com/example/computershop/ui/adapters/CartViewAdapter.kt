@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.computershop.databinding.CartItemBinding
 import com.example.computershop.network.data.models.responses.cart.CartData
 
-class CartViewAdapter : RecyclerView.Adapter<CartViewAdapter.CartViewHolder>() {
+class CartViewAdapter(private val action: (Int) -> Unit) : RecyclerView.Adapter<CartViewAdapter.CartViewHolder>() {
 
     private var cartItems = ArrayList<CartData>()
 
@@ -18,7 +18,7 @@ class CartViewAdapter : RecyclerView.Adapter<CartViewAdapter.CartViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class CartViewHolder(val binding: CartItemBinding):
+    class CartViewHolder(val binding: CartItemBinding, private val action: (Int) -> Unit):
         RecyclerView.ViewHolder(binding.root) {
             fun bind(data: CartData) {
                 binding.titleOfCartItem.text = data.product.title
@@ -29,6 +29,10 @@ class CartViewAdapter : RecyclerView.Adapter<CartViewAdapter.CartViewHolder>() {
                     .load(data.product.img + EXTENSION)
                     .timeout(6000000)
                     .into(binding.imageOfCartItem)
+
+                binding.btnRemoveItemFromCart.setOnClickListener {
+                    action.invoke(data.id)
+                }
             }
         }
 
@@ -38,7 +42,7 @@ class CartViewAdapter : RecyclerView.Adapter<CartViewAdapter.CartViewHolder>() {
     ): CartViewHolder {
         val cartItemBinding =
             CartItemBinding.inflate(LayoutInflater.from(parent.context),parent, false)
-        return CartViewHolder(cartItemBinding)
+        return CartViewHolder(cartItemBinding, action)
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {

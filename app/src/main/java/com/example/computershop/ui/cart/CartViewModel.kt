@@ -10,13 +10,24 @@ class CartViewModel(
     private val repository: CartRepository
 ) : ViewModel() {
 
-    private val cartListLiveData: MutableLiveData<ResultValue<CartResponse>> =
+    private var token: String? = null
+
+    private var cartListLiveData: MutableLiveData<ResultValue<CartResponse>> =
         MutableLiveData()
-    val cartList: LiveData<ResultValue<CartResponse>>
+    val cartList: MutableLiveData<ResultValue<CartResponse>>
         get() = cartListLiveData
 
     fun getCart(token: String) = viewModelScope.launch {
         cartListLiveData.value = repository.getBasket("Bearer $token")
     }
 
+    fun getToken(authToken: String) {
+        this.token = authToken
+    }
+
+    fun deleteItemFromCart(basketId: Int) =
+        viewModelScope.launch {
+            repository.deleteItemFromBasket("Bearer $token", basketId)
+            getCart("Bearer $token")
+        }
 }
