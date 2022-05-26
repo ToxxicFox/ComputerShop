@@ -8,7 +8,10 @@ import com.bumptech.glide.Glide
 import com.example.computershop.databinding.CartItemBinding
 import com.example.computershop.network.data.models.responses.cart.CartData
 
-class CartViewAdapter(private val action: (Int) -> Unit) : RecyclerView.Adapter<CartViewAdapter.CartViewHolder>() {
+class CartViewAdapter(private val deleteItem: (Int) -> Unit,
+                      private val incQuantity: (Int, Int) -> Unit,
+                      private val decQuantity: (Int, Int) -> Unit):
+    RecyclerView.Adapter<CartViewAdapter.CartViewHolder>() {
 
     private var cartItems = ArrayList<CartData>()
 
@@ -18,7 +21,10 @@ class CartViewAdapter(private val action: (Int) -> Unit) : RecyclerView.Adapter<
         notifyDataSetChanged()
     }
 
-    class CartViewHolder(val binding: CartItemBinding, private val action: (Int) -> Unit):
+    class CartViewHolder(val binding: CartItemBinding,
+                         private val deleteItem: (Int) -> Unit,
+                         private val incQuantity: (Int, Int) -> Unit,
+                         private val decQuantity: (Int, Int) -> Unit):
         RecyclerView.ViewHolder(binding.root) {
             fun bind(data: CartData) {
                 binding.titleOfCartItem.text = data.product.title
@@ -31,7 +37,15 @@ class CartViewAdapter(private val action: (Int) -> Unit) : RecyclerView.Adapter<
                     .into(binding.imageOfCartItem)
 
                 binding.btnRemoveItemFromCart.setOnClickListener {
-                    action.invoke(data.id)
+                    deleteItem.invoke(data.id)
+                }
+
+                binding.btnIncreaseQuantityOfCartItem.setOnClickListener {
+                    incQuantity.invoke(data.id, data.quantity)
+                }
+
+                binding.btnReduceQuantityOfCartItem.setOnClickListener {
+                    decQuantity.invoke(data.id, data.quantity)
                 }
             }
         }
@@ -42,7 +56,7 @@ class CartViewAdapter(private val action: (Int) -> Unit) : RecyclerView.Adapter<
     ): CartViewHolder {
         val cartItemBinding =
             CartItemBinding.inflate(LayoutInflater.from(parent.context),parent, false)
-        return CartViewHolder(cartItemBinding, action)
+        return CartViewHolder(cartItemBinding, deleteItem, incQuantity, decQuantity)
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {

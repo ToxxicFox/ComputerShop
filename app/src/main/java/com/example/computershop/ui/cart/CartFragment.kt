@@ -16,7 +16,9 @@ import com.example.computershop.ui.base.BaseFragment
 
 class CartFragment: BaseFragment<CartViewModel, CartFragmentBinding, CartRepository>(){
 
-    private val cartAdapter = CartViewAdapter(action = ::deleteCartItem)
+    private val cartAdapter = CartViewAdapter(deleteItem = ::deleteCartItem,
+                                                incQuantity = ::increaseItemQuantity,
+                                                decQuantity = ::reduceItemQuantity)
 
     override fun getViewModel() = CartViewModel::class.java
 
@@ -33,6 +35,7 @@ class CartFragment: BaseFragment<CartViewModel, CartFragmentBinding, CartReposit
         checkToken()
         initCartAdapter()
         displayCartProductList()
+        updateCart()
     }
 
     private fun initCartAdapter() {
@@ -40,6 +43,33 @@ class CartFragment: BaseFragment<CartViewModel, CartFragmentBinding, CartReposit
         cartListView?.layoutManager =
             LinearLayoutManager(activity)
         cartListView?.adapter = cartAdapter
+    }
+
+    private fun deleteCartItem(basketId: Int) {
+        viewModel.deleteItemFromCart(basketId)
+    }
+
+    private fun increaseItemQuantity(basketItemId: Int, quantity: Int) {
+        viewModel.increaseQuantity(quantity)
+        viewModel.changeQuantityItemInBasket(basketItemId)
+    }
+
+    private fun reduceItemQuantity(basketItemId: Int, quantity: Int) {
+        viewModel.reduceQuantity(basketItemId, quantity)
+        viewModel.changeQuantityItemInBasket(basketItemId)
+    }
+
+    private fun checkToken() {
+        userPreferences.authToken.asLiveData().observe(viewLifecycleOwner) {
+            if (it != null) {
+                viewModel.getToken(it)
+                viewModel.getCart(it)
+            } else {
+                Toast.makeText(requireContext(),
+                    "Пожалуйста авторизуйтесь",
+                    Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun displayCartProductList() {
@@ -57,19 +87,17 @@ class CartFragment: BaseFragment<CartViewModel, CartFragmentBinding, CartReposit
         }
     }
 
-    private fun deleteCartItem(basketId: Int) {
-        viewModel.deleteItemFromCart(basketId)
-    }
-
-    private fun checkToken() {
-        userPreferences.authToken.asLiveData().observe(viewLifecycleOwner) {
-            if (it != null) {
-                viewModel.getToken(it)
-                viewModel.getCart(it)
-            } else {
-                Toast.makeText(requireContext(),
-                    "Пожалуйста авторизуйтесь",
-                    Toast.LENGTH_SHORT).show()
+    private fun updateCart() {
+        viewModel.cartListAfterChanges.observe(viewLifecycleOwner) {
+            when (it) {
+                is ResultValue.Success -> {
+                    Toast.makeText(requireContext(), it.value.message, Toast.LENGTH_SHORT).show()
+                }
+                is ResultValue.Failure -> {
+                    Toast.makeText(requireContext(),
+                        it.errorCode.toString(),
+                        Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

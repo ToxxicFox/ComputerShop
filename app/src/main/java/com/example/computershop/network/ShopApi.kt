@@ -1,6 +1,7 @@
 package com.example.computershop.network
 
 import com.example.computershop.network.data.models.requests.CartAddRequest
+import com.example.computershop.network.data.models.requests.CartUpdateRequest
 import com.example.computershop.network.data.models.responses.cart.CartResponse
 import com.example.computershop.network.data.models.responses.cart.CartResponseAfterChanges
 import com.example.computershop.network.data.models.responses.cart.CartData
@@ -41,7 +42,7 @@ interface ShopApi {
     @PUT("practice/shop/v1/basket/{id}")
     suspend fun changeQuantityItemInBasket(@Header("Authorization") token: String,
                                            @Path("id") basketId: Int,
-                                           @Body quantity: Int): CartResponseAfterChanges
+                                           @Body quantity: CartUpdateRequest): CartResponseAfterChanges
 
     @Headers("Accept: application/json","Content-Type: application/json")
     @DELETE("practice/shop/v1/basket/{id}")
