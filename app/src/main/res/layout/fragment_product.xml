@@ -1,94 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2F4F4F"
     tools:context=".ui.catalog.ProductFragment">
 
-    <ImageView
-        android:id="@+id/productPageImg"
-        android:layout_width="@dimen/product_image_width"
-        android:layout_height="@dimen/product_image_height"
-        android:layout_marginStart="@dimen/product_image_margin"
-        android:layout_marginTop="@dimen/product_image_margin"
-        android:src="@android:drawable/ic_menu_gallery"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/pageProductTitle"
-        android:layout_width="0dp"
-        android:layout_height="145dp"
-        android:fontFamily="@font/roboto_bold"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:text="@string/product_title"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/productPageImg"
-        app:layout_constraintTop_toTopOf="@+id/productPageImg" />
+        <ImageView
+            android:id="@+id/productPageImg"
+            android:layout_width="@dimen/product_image_width"
+            android:layout_height="@dimen/product_image_height"
+            android:layout_marginTop="16dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/pageProductPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="@string/product_price"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/productPageImg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/productPageImg"
-        app:layout_constraintTop_toBottomOf="@+id/pageProductTitle" />
-
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="60dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productPageImg">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/pageProductTitle"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_bold"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/product_title"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/productPageImg"
+            app:layout_constraintStart_toStartOf="@+id/productPageImg"
+            app:layout_constraintTop_toBottomOf="@+id/productPageImg" />
 
-            <TextView
-                android:id="@+id/productPageInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:text="@string/product_info"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
+        <TextView
+            android:id="@+id/pageProductPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/product_price"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/pageProductTitle"
+            app:layout_constraintStart_toStartOf="@+id/pageProductTitle"
+            app:layout_constraintTop_toBottomOf="@+id/pageProductTitle" />
 
-            <Button
-                android:id="@+id/addToCart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="#4F2F2F"
-                android:backgroundTintMode="add"
-                android:text="@string/add_to_cart" />
+        <TextView
+            android:id="@+id/productPageInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/product_info"
+            android:textAlignment="viewStart"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pageProductPrice" />
 
-        </LinearLayout>
+        <Button
+            android:id="@+id/addToCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="56dp"
+            android:backgroundTint="#4F2F2F"
+            android:backgroundTintMode="add"
+            android:text="@string/add_to_cart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/productPageInfo"
+            app:layout_constraintStart_toStartOf="@+id/productPageInfo"
+            app:layout_constraintTop_toBottomOf="@+id/productPageInfo" />
 
-    </ScrollView>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

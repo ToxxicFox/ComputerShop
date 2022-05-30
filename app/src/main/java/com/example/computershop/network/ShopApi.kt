@@ -2,10 +2,12 @@ package com.example.computershop.network
 
 import com.example.computershop.network.data.models.requests.CartAddRequest
 import com.example.computershop.network.data.models.requests.CartUpdateRequest
+import com.example.computershop.network.data.models.requests.CreateOrderRequestModel
 import com.example.computershop.network.data.models.responses.cart.CartResponse
 import com.example.computershop.network.data.models.responses.cart.CartResponseAfterChanges
 import com.example.computershop.network.data.models.responses.cart.CartData
 import com.example.computershop.network.data.models.responses.categories.CategoryResponse
+import com.example.computershop.network.data.models.responses.order.OrderResponseModel
 import com.example.computershop.network.data.models.responses.products.ProductsResponse
 import retrofit2.http.*
 
@@ -48,5 +50,10 @@ interface ShopApi {
     @DELETE("practice/shop/v1/basket/{id}")
     suspend fun deleteItemFromBasket(@Header("Authorization") token: String,
                                      @Path("id") basketId: Int): CartResponseAfterChanges
+
+    @Headers("Accept: application/json","Content-Type: application/json")
+    @POST("practice/shop/v1/orders")
+    suspend fun createOrder(@Header("Authorization") token: String,
+                               @Body orderRequest: CreateOrderRequestModel): OrderResponseModel
 
 }

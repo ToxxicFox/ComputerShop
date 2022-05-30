@@ -25,7 +25,6 @@ class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, C
 
     private val categoryAdapter = CategoryViewAdapter(action = ::onFilterClick)
     private val productAdapter = ProductViewAdapter(action = ::onProductClick)
-    private val bundle = Bundle()
 
     override fun getViewModel() = CatalogViewModel::class.java
 
@@ -53,8 +52,9 @@ class CatalogFragment : BaseFragment<CatalogViewModel, CatalogFragmentBinding, C
     }
 
     private fun onProductClick(position: Int){
+        val bundle = Bundle()
         bundle.putString("ProductItem", Gson().toJson(productAdapter.snapshot()[position]))
-        findNavController().navigate(R.id.productFragment, bundle)
+        findNavController().navigate(R.id.action_navigation_catalog_to_navigation_product_fragment, bundle)
     }
 
     private fun initCategoryAdapter() {

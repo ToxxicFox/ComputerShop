@@ -12,4 +12,8 @@
     <string name="product_price">2499</string>
     <string name="product_info">Описание товара</string>
     <string name="create_order">Оформить заказ</string>
+    <string name="order_address">Адрес доставки</string>
+    <string name="order_user_name">Ф.И.О</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="total_price">Цена без скидки:</string>
 </resources>

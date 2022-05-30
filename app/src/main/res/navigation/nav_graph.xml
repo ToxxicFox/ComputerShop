@@ -11,8 +11,8 @@
         android:label="catalog_fragment"
         tools:layout="@layout/catalog_fragment" >
         <action
-            android:id="@+id/action_navigation_catalog_to_productFragment"
-            app:destination="@id/productFragment" />
+            android:id="@+id/action_navigation_catalog_to_navigation_product_fragment"
+            app:destination="@id/navigation_product_fragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_cart"
@@ -20,8 +20,8 @@
         android:label="cart_fragment"
         tools:layout="@layout/cart_fragment" >
         <action
-            android:id="@+id/action_navigation_cart_to_navigation_login"
-            app:destination="@id/navigation_login" />
+            android:id="@+id/action_navigation_cart_to_navigation_order_fragment"
+            app:destination="@id/navigation_order_fragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_profile"
@@ -57,12 +57,29 @@
             app:destination="@id/navigation_profile" />
     </fragment>
     <fragment
-        android:id="@+id/productFragment"
+        android:id="@+id/navigation_product_fragment"
         android:name="com.example.computershop.ui.catalog.ProductFragment"
         android:label="fragment_product"
         tools:layout="@layout/fragment_product" >
         <argument
             android:name="ProductItem"
             android:defaultValue="Empty" />
+        <action
+            android:id="@+id/action_navigation_product_fragment_to_navigation_catalog"
+            app:destination="@id/navigation_catalog" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_order_fragment"
+        android:name="com.example.computershop.ui.order.OrderFragment"
+        android:label="fragment_order"
+        tools:layout="@layout/fragment_order" >
+        <argument android:name="CartInfo"
+            android:defaultValue="Empty" />
+        <action
+            android:id="@+id/action_navigation_order_fragment_to_navigation_cart"
+            app:destination="@id/navigation_cart" />
+        <action
+            android:id="@+id/action_navigation_order_fragment_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
     </fragment>
 </navigation>

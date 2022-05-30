@@ -6,6 +6,7 @@ import com.example.computershop.repositories.*
 import com.example.computershop.ui.cart.CartViewModel
 import com.example.computershop.ui.catalog.CatalogViewModel
 import com.example.computershop.ui.catalog.ProductViewModel
+import com.example.computershop.ui.order.OrderViewModel
 import com.example.computershop.ui.profile.AuthViewModel
 import java.lang.IllegalArgumentException
 
@@ -27,6 +28,9 @@ class ViewModelFactory(
 
             modelClass.isAssignableFrom(ProductViewModel::class.java) ->
                 ProductViewModel(repository as ProductRepository) as T
+
+            modelClass.isAssignableFrom(OrderViewModel::class.java) ->
+                OrderViewModel(repository as OrderRepository) as T
 
             else -> throw IllegalArgumentException("ViewModel not found")
         }
