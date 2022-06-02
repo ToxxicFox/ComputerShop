@@ -77,6 +77,7 @@ class CartFragment: BaseFragment<CartViewModel, CartFragmentBinding, CartReposit
                     } else {
                         val bundle = Bundle()
                         bundle.putString("CartInfo", Gson().toJson(it.value))
+                        bundle.putString("Token", viewModel.token)
                         findNavController()
                             .navigate(R.id.action_navigation_cart_to_navigation_order_fragment, bundle)
                     }

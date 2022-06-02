@@ -16,4 +16,19 @@
     <string name="order_user_name">Ф.И.О</string>
     <string name="phone_number">Номер телефона</string>
     <string name="total_price">Цена без скидки:</string>
+    <string name="order_name">Заказ №44 от 05.05.1333</string>
+    <string name="order_status">Заказ создан</string>
+    <string name="customer_phone_number">+79999999999</string>
+    <string name="customer_address">Ростов-на-Дону, Садовая 4</string>
+    <string name="customer_name">Рязанцев Вячеслав Владимирович</string>
+    <string name="order_number">Заказ №323 от 05.05.2099</string>
+    <string name="order_total_price">129999</string>
+    <string name="total_price_with_discount">99999</string>
+    <string name="to_customer_profile">К моим заказам</string>
+    <string name="customer_address_title">Адрес клиента</string>
+    <string name="order_status_title">Статус заказа</string>
+    <string name="order_price_with_discount">Цена со скидкой</string>
+    <string name="total_price_title">Цена без скидки</string>
+    <string name="order_quantity_title">Количество:</string>
+    <string name="order_item_price_title">Цена:</string>
 </resources>

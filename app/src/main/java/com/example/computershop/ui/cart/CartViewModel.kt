@@ -12,7 +12,7 @@ class CartViewModel(
     private val repository: CartRepository
 ) : ViewModel() {
 
-    private var token: String? = null
+    var token: String? = null
     private var updateQuantityRequest: CartUpdateRequest? = null
 
     private var cartListLiveData: MutableLiveData<ResultValue<CartResponse>> =

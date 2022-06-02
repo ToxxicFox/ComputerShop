@@ -7,7 +7,9 @@ import com.example.computershop.network.data.models.responses.cart.CartResponse
 import com.example.computershop.network.data.models.responses.cart.CartResponseAfterChanges
 import com.example.computershop.network.data.models.responses.cart.CartData
 import com.example.computershop.network.data.models.responses.categories.CategoryResponse
-import com.example.computershop.network.data.models.responses.order.OrderResponseModel
+import com.example.computershop.network.data.models.responses.order.CreateOrderResponseModel
+import com.example.computershop.network.data.models.responses.order.GetAllOrdersResponseModel
+import com.example.computershop.network.data.models.responses.order.GetOrderByIdResponseModel
 import com.example.computershop.network.data.models.responses.products.ProductsResponse
 import retrofit2.http.*
 
@@ -54,6 +56,15 @@ interface ShopApi {
     @Headers("Accept: application/json","Content-Type: application/json")
     @POST("practice/shop/v1/orders")
     suspend fun createOrder(@Header("Authorization") token: String,
-                               @Body orderRequest: CreateOrderRequestModel): OrderResponseModel
+                               @Body orderRequest: CreateOrderRequestModel): CreateOrderResponseModel
+
+    @Headers("Accept: application/json","Content-Type: application/json")
+    @GET("practice/shop/v1/orders")
+    suspend fun getOrders(@Header("Authorization") token: String): GetAllOrdersResponseModel
+
+    @Headers("Accept: application/json","Content-Type: application/json")
+    @GET("practice/shop/v1/orders/{id}")
+    suspend fun getOrderById(@Header("Authorization") token: String,
+                                           @Path("id") orderId: Int): GetOrderByIdResponseModel
 
 }

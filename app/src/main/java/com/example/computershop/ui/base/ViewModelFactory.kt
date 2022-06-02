@@ -4,9 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.computershop.repositories.*
 import com.example.computershop.ui.cart.CartViewModel
+import com.example.computershop.ui.cart.DetailOrderViewModel
 import com.example.computershop.ui.catalog.CatalogViewModel
 import com.example.computershop.ui.catalog.ProductViewModel
-import com.example.computershop.ui.order.OrderViewModel
+import com.example.computershop.ui.cart.OrderViewModel
 import com.example.computershop.ui.profile.AuthViewModel
 import java.lang.IllegalArgumentException
 
@@ -31,6 +32,9 @@ class ViewModelFactory(
 
             modelClass.isAssignableFrom(OrderViewModel::class.java) ->
                 OrderViewModel(repository as OrderRepository) as T
+
+            modelClass.isAssignableFrom(DetailOrderViewModel::class.java) ->
+                DetailOrderViewModel(repository as OrderRepository) as T
 
             else -> throw IllegalArgumentException("ViewModel not found")
         }
