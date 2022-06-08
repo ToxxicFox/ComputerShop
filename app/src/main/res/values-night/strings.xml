@@ -31,4 +31,7 @@
     <string name="total_price_title">Цена без скидки</string>
     <string name="order_quantity_title">Количество:</string>
     <string name="order_item_price_title">Цена:</string>
+    <string name="exit_btn">Выйти из личного кабинета</string>
+    <string name="profile_order_number">Заказ №%1$d</string>
+    <string name="order_cost">Стоимость заказа</string>
 </resources>

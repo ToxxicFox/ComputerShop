@@ -14,12 +14,6 @@ class OrderRepository(
         api.createOrder(token, order)
     }
 
-    suspend fun getOrders(
-        token: String
-    ) = safeApiCall {
-        api.getOrders(token)
-    }
-
     suspend fun getOrdersById(
         token: String,
         orderId: Int

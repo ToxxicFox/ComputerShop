@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.computershop.R
 import com.example.computershop.databinding.FragmentDetailOrderBinding
 import com.example.computershop.network.ResultValue
 import com.example.computershop.network.ShopApi
@@ -33,6 +35,7 @@ class DetailOrderFragment :
         getOrderInfo()
         initDetailOrderViewAdapter()
         displayOrderProductList()
+        toProfile()
     }
 
     private fun getOrderInfo() {
@@ -69,6 +72,13 @@ class DetailOrderFragment :
                         Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    private fun toProfile() {
+        binding?.toCustomerProfile?.setOnClickListener {
+            findNavController()
+                .navigate(R.id.action_navigation_detail_order_fragment_to_navigation_profile)
         }
     }
 
