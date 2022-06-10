@@ -13,6 +13,7 @@ import com.example.computershop.network.ShopApi
 import com.example.computershop.network.data.models.responses.products.ProductData
 import com.example.computershop.repositories.ProductRepository
 import com.example.computershop.ui.base.BaseFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 
 private const val EXT = ".jpg"

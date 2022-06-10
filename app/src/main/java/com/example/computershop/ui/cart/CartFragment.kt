@@ -100,6 +100,7 @@ class CartFragment: BaseFragment<CartViewModel, CartFragmentBinding, CartReposit
                 Toast.makeText(requireContext(),
                     "Пожалуйста авторизуйтесь",
                     Toast.LENGTH_SHORT).show()
+                binding?.buyButton?.visibility = View.GONE
             }
         }
     }

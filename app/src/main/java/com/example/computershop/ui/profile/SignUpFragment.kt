@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.example.computershop.R
 import com.example.computershop.databinding.FragmentSignUpBinding
@@ -33,6 +34,7 @@ class SignUpFragment : BaseFragment<AuthViewModel, FragmentSignUpBinding, AuthRe
         binding?.apply {
             signUpFragment = this@SignUpFragment
         }
+        checkToken()
     }
 
     fun signUp() {
@@ -42,7 +44,6 @@ class SignUpFragment : BaseFragment<AuthViewModel, FragmentSignUpBinding, AuthRe
             when (it) {
                 is ResultValue.Success -> {
                     viewModel.saveAuthToken(it.value)
-                    findNavController().navigate(R.id.action_navigation_sign_up_to_navigation_profile)
                 }
                 is ResultValue.Failure -> {
                     Toast.makeText(requireContext(), "Registration Failure", Toast.LENGTH_SHORT)
@@ -59,6 +60,14 @@ class SignUpFragment : BaseFragment<AuthViewModel, FragmentSignUpBinding, AuthRe
 
         viewModel.signUp(requestSignUpObject)
 
+    }
+
+    private fun checkToken() {
+        userPreferences.authToken.asLiveData().observe(viewLifecycleOwner) {
+            if (it != null) {
+                findNavController().navigate(R.id.action_navigation_sign_up_to_navigation_profile)
+            }
+        }
     }
 
 }

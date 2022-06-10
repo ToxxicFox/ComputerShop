@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.computershop.R
 import com.example.computershop.databinding.ProfileFragmentBinding
 import com.example.computershop.network.ResultValue
 import com.example.computershop.network.ShopApi
@@ -27,13 +29,14 @@ class ProfileFragment :
     ) = ProfileFragmentBinding.inflate(inflater, container, false)
 
     override fun getFragmentRepository() =
-        ProfileRepository(remoteDataSource.buildApi(ShopApi::class.java))
+        ProfileRepository(remoteDataSource.buildApi(ShopApi::class.java), userPreferences)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkToken()
         initProfileOrderAdapter()
         displayProfileProductList()
+        logout()
     }
 
     private fun initProfileOrderAdapter() {
@@ -46,12 +49,9 @@ class ProfileFragment :
     private fun checkToken() {
         userPreferences.authToken.asLiveData().observe(viewLifecycleOwner) {
             if (it != null) {
-                viewModel.getToken(it)
-                viewModel.getOrders()
+                viewModel.getOrders(it)
             } else {
-                Toast.makeText(requireContext(),
-                    "Пожалуйста авторизуйтесь",
-                    Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_navigation_profile_to_navigation_login)
             }
         }
     }
@@ -68,6 +68,12 @@ class ProfileFragment :
                         Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    private fun logout() {
+        binding?.exitBtn?.setOnClickListener {
+            viewModel.logout()
         }
     }
 

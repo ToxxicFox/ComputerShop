@@ -29,6 +29,11 @@
         android:label="Профиль"
         tools:layout="@layout/profile_fragment" >
         <action
+            android:id="@+id/action_navigation_profile_to_navigation_catalog"
+            app:destination="@id/navigation_catalog"
+            app:popUpTo="@id/navigation_profile"
+            app:popUpToInclusive="true"/>
+        <action
             android:id="@+id/action_navigation_profile_to_navigation_login"
             app:destination="@id/navigation_login" />
     </fragment>
@@ -37,9 +42,6 @@
         android:name="com.example.computershop.ui.profile.SignUpFragment"
         android:label="Регистрация"
         tools:layout="@layout/fragment_sign_up" >
-        <action
-            android:id="@+id/action_navigation_sign_up_to_navigation_login"
-            app:destination="@id/navigation_login" />
         <action
             android:id="@+id/action_navigation_sign_up_to_navigation_profile"
             app:destination="@id/navigation_profile" />

@@ -12,19 +12,17 @@ class ProfileViewModel(
     private val repository: ProfileRepository
 ) : ViewModel() {
 
-    var token: String? = null
-
     private var profileOrderListMutableLiveData: MutableLiveData<ResultValue<GetAllOrdersResponseModel>> =
         MutableLiveData()
     val orderProductListLiveData: MutableLiveData<ResultValue<GetAllOrdersResponseModel>>
         get() = profileOrderListMutableLiveData
 
-    fun getOrders() = viewModelScope.launch {
+    fun getOrders(token: String) = viewModelScope.launch {
         profileOrderListMutableLiveData.value = repository.getOrders("Bearer $token")
     }
 
-    fun getToken(authToken: String) {
-        this.token = authToken
+    fun logout() = viewModelScope.launch {
+        repository.logout()
     }
 
 }
