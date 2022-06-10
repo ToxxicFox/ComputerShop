@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingBottom="4dp">
+    android:padding="4dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/productView"
@@ -33,11 +32,11 @@
             <TextView
                 android:id="@+id/productTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
                 android:layout_margin="8dp"
                 android:fontFamily="@font/roboto"
-                android:text="AMD"
-                android:layout_gravity="center"
+                android:text="@string/product_title"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -51,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
-                    android:text="5999"
+                    android:text="@string/product_price"
                     android:textColor="@color/white"
                     android:layout_margin="8dp"
                     android:textSize="20sp" />

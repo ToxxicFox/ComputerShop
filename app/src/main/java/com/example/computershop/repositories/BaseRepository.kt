@@ -1,12 +1,9 @@
 package com.example.computershop.repositories
 
-import android.util.Log
 import com.example.computershop.network.ResultValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-
-private const val TAG = "API"
 
 abstract class BaseRepository {
 
@@ -18,7 +15,6 @@ abstract class BaseRepository {
             try {
                 ResultValue.Success(apiCall.invoke())
             } catch (throwable: Throwable){
-                Log.d(TAG, throwable.toString())
                 when(throwable) {
                     is HttpException -> {
                         ResultValue.Failure(

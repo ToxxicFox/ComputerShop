@@ -29,6 +29,12 @@ class UserPreferences (
         }
     }
 
+    suspend fun clear() {
+        appContext.dataStore.edit { preferences ->
+            preferences.clear()
+        }
+    }
+
     companion object {
         private val KEY_AUTH = stringPreferencesKey("auth_key")
     }

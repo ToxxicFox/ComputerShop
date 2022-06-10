@@ -24,10 +24,16 @@ class MainActivity : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_catalog, R.id.navigation_cart, R.id.navigation_login
+                R.id.navigation_catalog, R.id.navigation_cart,
+                R.id.navigation_login, R.id.navigation_profile
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

@@ -46,7 +46,6 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
             when (it) {
                 is ResultValue.Success -> {
                     viewModel.saveAuthToken(it.value)
-                    findNavController().navigate(R.id.action_navigation_login_to_navigation_profile)
                 }
                 is ResultValue.Failure -> {
                     Toast.makeText(requireContext(), "Login Failure", Toast.LENGTH_SHORT).show()

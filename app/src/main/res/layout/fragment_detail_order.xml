@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.cart.DetailOrderFragment">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/orderItemsList"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/orderStatus"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="@string/order_status"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="@+id/orderStatusText"
+        app:layout_constraintTop_toBottomOf="@+id/orderStatusText" />
+
+    <TextView
+        android:id="@+id/totalOrderPrice"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="@string/order_total_price"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="@+id/totalOrderPriceText"
+        app:layout_constraintTop_toBottomOf="@+id/totalOrderPriceText" />
+
+    <TextView
+        android:id="@+id/totalOrderPriceWithDiscount"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="@string/total_price_with_discount"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="@+id/totalPriceWitchDiscountText"
+        app:layout_constraintTop_toBottomOf="@+id/totalPriceWitchDiscountText" />
+
+    <TextView
+        android:id="@+id/customerName"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="@string/customer_name"
+        app:layout_constraintStart_toStartOf="@+id/customerNameText"
+        app:layout_constraintTop_toBottomOf="@+id/customerNameText" />
+
+    <TextView
+        android:id="@+id/customerPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="@string/customer_phone_number"
+        app:layout_constraintStart_toStartOf="@+id/customerPhoneText"
+        app:layout_constraintTop_toBottomOf="@+id/customerPhoneText" />
+
+    <TextView
+        android:id="@+id/customerAddress"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="@string/customer_address"
+        app:layout_constraintStart_toStartOf="@+id/customerAddressText"
+        app:layout_constraintTop_toBottomOf="@+id/customerAddressText" />
+
+    <TextView
+        android:id="@+id/orderNumber"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/order_number"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderItemsList" />
+
+    <TextView
+        android:id="@+id/customerAddressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="@string/customer_address_title"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/customerName"
+        app:layout_constraintTop_toBottomOf="@+id/customerName" />
+
+    <TextView
+        android:id="@+id/customerNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/order_user_name"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/orderItemsList"
+        app:layout_constraintTop_toBottomOf="@+id/orderNumber" />
+
+    <TextView
+        android:id="@+id/customerPhoneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="@string/phone_number"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/customerAddress"
+        app:layout_constraintTop_toBottomOf="@+id/customerAddress" />
+
+    <TextView
+        android:id="@+id/totalOrderPriceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="@string/total_price_title"
+        android:textAlignment="textEnd"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/orderStatus"
+        app:layout_constraintTop_toBottomOf="@+id/orderStatus" />
+
+    <TextView
+        android:id="@+id/orderStatusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/order_status_title"
+        android:textAlignment="textEnd"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/orderItemsList"
+        app:layout_constraintTop_toBottomOf="@+id/orderNumber" />
+
+    <TextView
+        android:id="@+id/totalPriceWitchDiscountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="@string/order_price_with_discount"
+        android:textAlignment="textEnd"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/totalOrderPrice"
+        app:layout_constraintTop_toBottomOf="@+id/totalOrderPrice" />
+
+    <Button
+        android:id="@+id/toCustomerProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="56dp"
+        android:text="@string/to_customer_profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

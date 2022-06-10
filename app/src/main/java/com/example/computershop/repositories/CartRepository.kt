@@ -2,6 +2,7 @@ package com.example.computershop.repositories
 
 import com.example.computershop.network.ShopApi
 import com.example.computershop.network.data.models.requests.CartAddRequest
+import com.example.computershop.network.data.models.requests.CartUpdateRequest
 
 class CartRepository(
     private val api: ShopApi
@@ -20,19 +21,12 @@ class CartRepository(
         api.getItemFromBasket(token, basketItemId)
     }
 
-    suspend fun addItemToBasket(
-        token: String,
-        item: CartAddRequest
-    ) = safeApiCall {
-        api.addItemToBasket(token, item)
-    }
-
     suspend fun changeQuantityItemInBasket(
         token: String,
         basketItemId: Int,
-        quantity: Int
+        quantity: CartUpdateRequest
     ) = safeApiCall {
-        api.changeQuantityItemInBasket(token, basketItemId, quantity)
+            api.changeQuantityItemInBasket(token, basketItemId, quantity)
     }
 
     suspend fun deleteItemFromBasket(
