@@ -1,8 +1,8 @@
 package com.example.computershop.repositories
 
 import com.example.computershop.network.AuthApi
-import com.example.computershop.network.data.models.LoginRequestObject
-import com.example.computershop.network.data.models.SignUpRequestObject
+import com.example.computershop.network.data.models.requests.LoginRequest
+import com.example.computershop.network.data.models.requests.SignUpRequest
 
 class AuthRepository(
     private val api: AuthApi,
@@ -10,13 +10,13 @@ class AuthRepository(
 ) : BaseRepository() {
 
     suspend fun login(
-        user: LoginRequestObject
+        user: LoginRequest
     ) = safeApiCall {
         api.login(user)
     }
 
     suspend fun signUp(
-        user: SignUpRequestObject
+        user: SignUpRequest
     ) = safeApiCall {
         api.signUp(user)
     }
@@ -24,5 +24,4 @@ class AuthRepository(
     suspend fun saveAuthToken(token: String) {
         preferences.saveAuthToken(token)
     }
-
 }

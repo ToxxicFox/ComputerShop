@@ -3,10 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/activity_main.xml" value="0.21240942028985507" />
-        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/fragment_login.xml" value="0.2359375" />
-        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
-        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/profile_fragment.xml" value="0.2" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/cart_fragment.xml" value="0.2536231884057971" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/cart_item.xml" value="0.2536231884057971" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/catalog_fragment.xml" value="0.2536231884057971" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/category_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/detail_order_product_item.xml" value="0.253125" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/fragment_detail_order.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/fragment_login.xml" value="0.2536231884057971" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/fragment_order.xml" value="0.2536231884057971" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/fragment_product.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/product_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/profile_fragment.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/layout/profile_order_item.xml" value="0.4" />
+        <entry key="..\:/Users/ToxicFox/AndroidStudioProjects/ComputerShop/app/src/main/res/menu/bottom_menu_items.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

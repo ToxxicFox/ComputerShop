@@ -15,7 +15,7 @@ import com.example.computershop.repositories.UserPreferences
 abstract class BaseFragment<tViewModel: ViewModel, binding: ViewBinding, repository: BaseRepository>
     : Fragment() {
 
-    protected lateinit var binding: binding
+    protected var binding: binding? = null
     protected lateinit var viewModel: tViewModel
     protected val remoteDataSource = RemoteDataSource()
     protected lateinit var userPreferences: UserPreferences
@@ -29,7 +29,7 @@ abstract class BaseFragment<tViewModel: ViewModel, binding: ViewBinding, reposit
         binding = getFragmentBinding(inflater, container)
         val factory = ViewModelFactory(getFragmentRepository())
         viewModel = ViewModelProvider(this, factory).get(getViewModel())
-        return binding.root
+        return binding?.root
     }
 
     abstract fun getViewModel() : Class<tViewModel>
@@ -37,4 +37,9 @@ abstract class BaseFragment<tViewModel: ViewModel, binding: ViewBinding, reposit
     abstract fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?) : binding
 
     abstract fun getFragmentRepository(): repository
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }

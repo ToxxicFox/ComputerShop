@@ -1,12 +1,9 @@
 package com.example.computershop.ui.profile
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.computershop.network.ResultValue
-import com.example.computershop.network.data.models.LoginRequestObject
-import com.example.computershop.network.data.models.SignUpRequestObject
+import com.example.computershop.network.data.models.requests.LoginRequest
+import com.example.computershop.network.data.models.requests.SignUpRequest
 import com.example.computershop.repositories.AuthRepository
 import kotlinx.coroutines.launch
 
@@ -19,13 +16,13 @@ class AuthViewModel(
         get() = assignedToken
 
     fun login(
-        user: LoginRequestObject
+        user: LoginRequest
     ) = viewModelScope.launch {
         assignedToken.value = repository.login(user)
     }
 
     fun signUp(
-        user: SignUpRequestObject
+        user: SignUpRequest
     ) = viewModelScope.launch {
         assignedToken.value = repository.signUp(user)
     }

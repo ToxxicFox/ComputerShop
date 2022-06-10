@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.catalog.ProductFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/productPageImg"
+            android:layout_width="@dimen/product_image_width"
+            android:layout_height="@dimen/product_image_height"
+            android:layout_marginTop="16dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pageProductTitle"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_bold"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/product_title"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/productPageImg"
+            app:layout_constraintStart_toStartOf="@+id/productPageImg"
+            app:layout_constraintTop_toBottomOf="@+id/productPageImg" />
+
+        <TextView
+            android:id="@+id/pageProductPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/product_price"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/pageProductTitle"
+            app:layout_constraintStart_toStartOf="@+id/pageProductTitle"
+            app:layout_constraintTop_toBottomOf="@+id/pageProductTitle" />
+
+        <TextView
+            android:id="@+id/productPageInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/product_info"
+            android:textAlignment="viewStart"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pageProductPrice" />
+
+        <Button
+            android:id="@+id/addToCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="56dp"
+            android:backgroundTint="#4F2F2F"
+            android:backgroundTintMode="add"
+            android:text="@string/add_to_cart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/productPageInfo"
+            app:layout_constraintStart_toStartOf="@+id/productPageInfo"
+            app:layout_constraintTop_toBottomOf="@+id/productPageInfo" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
