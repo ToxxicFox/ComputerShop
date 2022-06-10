@@ -1,7 +1,6 @@
 package com.example.computershop.network.data.models.responses.order
 
-class CreateOrderResponseModel (
-    val success: Boolean,
+data class CreateOrderResponseModel(
     val message: String,
-    val data: List<Any?>
+    val order: Data
 )

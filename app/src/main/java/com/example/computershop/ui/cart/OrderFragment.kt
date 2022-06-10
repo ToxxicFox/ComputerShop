@@ -58,16 +58,12 @@ class OrderFragment: BaseFragment<OrderViewModel, FragmentOrderBinding, OrderRep
         viewModel.cartList.observe(viewLifecycleOwner) {
             when(it) {
                 is ResultValue.Success -> {
-                    if (it.value.success) {
-                        viewModel.getOrderId(it.value.message)
-                        Toast.makeText(requireContext(), it.value.message, Toast.LENGTH_SHORT).show()
-                        findNavController()
-                            .navigate(
-                                R.id.action_navigation_order_fragment_to_navigation_detail_order_fragment,
-                                viewModel.bundle)
-                    } else {
-                        Toast.makeText(requireContext(), it.value.message, Toast.LENGTH_SHORT).show()
-                    }
+                    viewModel.getOrderId(it.value.order.id, it.value.message)
+                    Toast.makeText(requireContext(), it.value.message, Toast.LENGTH_SHORT).show()
+                    findNavController()
+                        .navigate(
+                            R.id.action_navigation_order_fragment_to_navigation_detail_order_fragment,
+                            viewModel.bundle)
                 }
                 is ResultValue.Failure -> {
                     Toast.makeText(requireContext(),

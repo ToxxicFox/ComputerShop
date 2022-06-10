@@ -30,9 +30,8 @@ class OrderViewModel(
         cartList.value = repository.createOrder("Bearer $token", request)
     }
 
-    fun getOrderId(message: String) {
-        val result = message.substringBefore(" от")
-        val orderId = result.substringAfter("№")
+    fun getOrderId(id: Int, message: String) {
+        val orderId = id.toString()
         bundle.putString("orderId", orderId)
         bundle.putString("orderName", message)
         bundle.putString("token", token)
